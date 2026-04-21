@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -18,11 +18,15 @@ const OrderScreen = () => {
     const [loadingPay, setLoadingPay] = useState(false);
     const [error, setError] = useState(null);
 
-    const userInfo = {
-        token: 'YOUR_JWT_TOKEN_HERE',
-    };
+    const storedUserInfo = localStorage.getItem('userInfo');
+    const userInfo = storedUserInfo ? JSON.parse(storedUserInfo) : null;
 
-    const verifyPayment = async (reference) => {
+    const verifyPayment = useCallback(async (reference) => {
+        if (!userInfo?.token) {
+            setError('You must be logged in to verify payment.');
+            return;
+        }
+
         try {
             setLoadingPay(true);
             const config = {
@@ -50,7 +54,7 @@ const OrderScreen = () => {
             toast.error(err?.response?.data?.message || err.message);
             setLoadingPay(false);
         }
-    };
+    }, [orderId, searchParams, setSearchParams, userInfo?.token]);
 
     useEffect(() => {
         const fetchOrder = async () => {
@@ -77,7 +81,7 @@ const OrderScreen = () => {
             }
         });
 
-    }, [orderId, paystackReference, userInfo.token]);
+    }, [orderId, paystackReference, userInfo?.token, verifyPayment]);
 
     const paystackConfig = {
         reference: new Date().getTime().toString(),

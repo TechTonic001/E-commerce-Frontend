@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import FilterIcon from './icons/FilterIcon';
 import ChevronDownIcon from './icons/ChevronDownIcon';
 import { Link } from 'react-router-dom'; 
-import { useCart } from '../context/CartContext';
+import { useCart } from '../context/useCart';
 
 const allCategories = ['All Categories', "Men's Fashion", "Women's Fashion", 'Electronics', 'Sports', 'Shoes', 'Clothing', 'Accessories', 'Home & Living'];
 const allBrands = ['Nike', 'Adidas', 'Samsung', 'Gucci', 'Apple', 'Dior', 'ZenMist', 'KitchenPro', 'HyperGear', 'KeyPro', 'SkyView', 'CleanBot', 'KidCare', 'Artify', 'BeautyLux', 'BrightHome', 'HomeElegance', 'Oraimo', 'Sony', 'LG', 'HP', 'Asus', 'Dell', 'Puma',  'UrbanStyle', 'FastFeet', 'TechTime', 'SoundMax', 'FashionHub', 'FitGear'];

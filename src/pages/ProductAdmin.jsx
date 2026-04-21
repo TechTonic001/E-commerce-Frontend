@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
     getProducts,
     createProduct,
@@ -21,7 +21,7 @@ const ProductAdmin = () => {
 
     const navigate = useNavigate();
 
-    const loadProducts = async (currentPage) => {
+    const loadProducts = useCallback(async (currentPage) => {
         try {
             setLoading(true);
             setError(null);
@@ -36,11 +36,11 @@ const ProductAdmin = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [navigate]);
 
     useEffect(() => {
         loadProducts(page);
-    }, [page]);
+    }, [page, loadProducts]);
 
     const handleCreate = async (formData) => {
         try {

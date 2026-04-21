@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Star, StarHalf, Plus, Minus, ChevronDown } from 'lucide-react';
-import { useCart } from '../context/CartContext.jsx'; 
+import { useCart } from '../context/useCart'; 
 
 const Rating = ({ rating, numReviews }) => {
     const fullStars = Math.floor(rating);
@@ -190,7 +190,7 @@ const ProductDetailPage = () => {
 
     const { addToCart } = useCart();
 
-    const fetchProduct = async () => {
+    const fetchProduct = useCallback(async () => {
         if (!productId) return;
 
         setLoading(true);
@@ -219,11 +219,11 @@ const ProductDetailPage = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [productId]);
 
     useEffect(() => {
         fetchProduct();
-    }, [productId]);
+    }, [fetchProduct]);
 
     useEffect(() => {
         if (product && product.category) {

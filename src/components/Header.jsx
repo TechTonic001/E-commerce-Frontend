@@ -6,7 +6,7 @@ import CartIcon from "./icons/CartIcon";
 import MenuIcon from "./icons/MenuIcon";
 import CloseIcon from "./icons/CloseIcon";
 import ProfileIcon from "./icons/ProfileIcon";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../context/useCart";
 
 const Header = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../context/useCart';
 import { FaShippingFast, FaCreditCard, FaCheckCircle } from 'react-icons/fa';
 
 export default function PaymentPage() {

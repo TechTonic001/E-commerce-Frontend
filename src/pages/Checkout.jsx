@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaShippingFast, FaCreditCard, FaCheckCircle } from 'react-icons/fa';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../context/useCart';
 
 const FormInput = ({ label, id, placeholder, optional = false, half = false, value, onChange }) => (
     <div className={half ? 'w-full' : 'col-span-2'}>
